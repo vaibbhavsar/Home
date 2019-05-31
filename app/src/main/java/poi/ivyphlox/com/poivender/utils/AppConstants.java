@@ -8,9 +8,9 @@ public interface AppConstants {
 
     String PIPE_VALUES_SEPERATOR = "\\|";
     String DOT_VALUES_SEPERATOR = "\\.";
-    String APP_CLIENT_TYPE = "consumerApp";
+    String APP_CLIENT_TYPE = "Member";
     String APP_NAME = "WineList";
-    String APP_CLIENT_TYPE_KEY = "clientType";
+    String APP_CLIENT_TYPE_KEY = "usertype";
     String APP_AUTHORIZATION="Authorization";
     String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int MINIMUM_PASSWORD = 4;

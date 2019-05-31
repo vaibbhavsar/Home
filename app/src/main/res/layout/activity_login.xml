@@ -29,7 +29,6 @@
         android:layout_above="@+id/llLogin"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/colorBlack"
         android:textSize="@dimen/large_text_title"/>
     
     <LinearLayout
