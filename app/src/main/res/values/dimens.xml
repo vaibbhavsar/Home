@@ -1,0 +1,60 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!--Text Size-->
+
+
+    <dimen name="large_text">16sp</dimen>
+    <dimen name="medium_text">14sp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="large_text_title">22dp</dimen>
+    <dimen name="sml_text_title">14sp</dimen>
+    <dimen name="mid_text_title">16sp</dimen>
+    <dimen name="nor_text_title">12sp</dimen>
+    <dimen name="large_margine">20dp</dimen>
+    <dimen name="text_size_large">18dp</dimen>
+    <dimen name="space_x_small">8dp</dimen>
+
+
+    <dimen name="V0dip">0dip</dimen>
+    <dimen name="V1dip">1dip</dimen>
+    <dimen name="V2dip">2dip</dimen>
+    <dimen name="V3dip">3dip</dimen>
+    <dimen name="V4dip">4dip</dimen>
+    <dimen name="V5dip">5dip</dimen>
+    <dimen name="V6dip">6dip</dimen>
+    <dimen name="V7dip">7dip</dimen>
+    <dimen name="V8dip">8dip</dimen>
+    <dimen name="V9dip">9dip</dimen>
+    <dimen name="V10dip">10dip</dimen>
+    <dimen name="V12dip">12dip</dimen>
+    <dimen name="V14dip">14dip</dimen>
+    <dimen name="V16dip">16dip</dimen>
+    <dimen name="V18dip">18dip</dimen>
+    <dimen name="V20dip">20dip</dimen>
+    <dimen name="V24dip">24dip</dimen>
+    <dimen name="V28dip">28dip</dimen>
+    <dimen name="V32dip">32dip</dimen>
+    <dimen name="V35dip">35dip</dimen>
+    <dimen name="V40dip">40dip</dimen>
+    <dimen name="V50dip">50dip</dimen>
+    <dimen name="V60dip">60dip</dimen>
+    <dimen name="V70dip">70dip</dimen>
+    <dimen name="V80dip">80dip</dimen>
+    <dimen name="V90dip">90dip</dimen>
+    <dimen name="V100dip">100dip</dimen>
+    <dimen name="profile_card_round">4dp</dimen>
+    <dimen name="V30dip">30dp</dimen>
+    <dimen name="V15dip">15dp</dimen>
+    <dimen name="V25dip">25dp</dimen>
+    <dimen name="V200dip">200dp</dimen>
+    <dimen name="V150dip">150dp</dimen>
+    <dimen name="invitePadding">8dp</dimen>
+
+
+</resources>

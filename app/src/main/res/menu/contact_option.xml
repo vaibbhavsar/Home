@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_Family"
+        android:orderInCategory="14"
+        android:title="@string/family"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_Friends"
+        android:orderInCategory="14"
+        android:title="@string/friend"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_Office"
+        android:orderInCategory="14"
+        android:title="@string/office"
+        app:showAsAction="never"/>
+</menu>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#12b2f1</color>
+    <color name="colorPrimaryDark">#033d54</color>
+    <color name="colorAccent">#96BCB7</color>
+
+    <!--<color name="colorPrimary">#FD335B</color>-->
+    <!--<color name="colorPrimaryDark">#a6213b</color>-->
+    <!--<color name="colorAccent">#96BCB7</color>-->
+
+    <color name="colorTextPrimary">#272727</color>
+    <color name="colorTextDisable">#919392</color>
+    <color name="colorTextWhite">#FFFFFF</color>
+    <color name="colorTextBlue">#4B7CBE</color>
+    <color name="colorBottomWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#969a9e</color>
+    <color name="colorGrayTrans">#b3969a9e</color>
+    <color name="black_color">#000</color>
+    <color name="white">#FFF</color>
+    <color name="green">#5BC236</color>
+    <color name="blue">#3c80dc</color>
+    <color name="whatsaapGreen">#25d366</color>
+    <color name="wechatGreen">#2FBB19</color>
+    <color name="facebookBlue">#3c5898</color>
+    <color name="twitterBlue">#1da1f2</color>
+
+    <color name="selected">#4B7CBE</color>
+    <color name="selected_trans">#684b7cbe</color>
+    <color name="tranns">#004b7cbe</color>
+
+</resources>

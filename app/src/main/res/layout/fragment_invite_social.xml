@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="ivyphlox.com.poi.activity.InviteActivity">
+
+    <LinearLayout
+        android:id="@+id/lnrMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/invitePadding"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/green"
+            android:src="@drawable/ic_speech_bubble_with_text_lines"
+            android:padding="@dimen/V3dip"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="Message" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_marginBottom="@dimen/V3dip"
+        android:background="@color/colorGrayTrans" />
+    <LinearLayout
+        android:id="@+id/lnrWhatsapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/invitePadding"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/whatsaapGreen"
+            android:src="@drawable/ic_whatsapp"
+            android:padding="@dimen/V3dip"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="Whatsapp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_marginBottom="@dimen/V3dip"
+        android:background="@color/colorGrayTrans" />
+
+    <LinearLayout
+        android:id="@+id/lnrEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/invitePadding"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/selected"
+            android:src="@drawable/ic_letter"
+            android:padding="@dimen/V3dip"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="Email" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_marginBottom="@dimen/V3dip"
+        android:background="@color/colorGrayTrans" />
+    <LinearLayout
+        android:id="@+id/lnrFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/invitePadding"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/facebookBlue"
+            android:src="@drawable/ic_facebook"
+            android:padding="@dimen/V3dip"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="Facebook" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/V3dip"
+        android:layout_height="0.5px"
+        android:background="@color/colorGrayTrans" />
+    <LinearLayout
+        android:id="@+id/lnrTwitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:padding="@dimen/V10dip"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/twitterBlue"
+            android:padding="@dimen/V3dip"
+            android:src="@drawable/ic_twitter"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="Twitter" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_marginBottom="@dimen/V3dip"
+        android:visibility="gone"
+        android:background="@color/colorGrayTrans" />
+    <LinearLayout
+        android:id="@+id/lnrWeChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/invitePadding"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="@dimen/V3dip"
+            android:background="@color/wechatGreen"
+            android:src="@drawable/ic_wechat"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+            android:padding="@dimen/V5dip"
+            android:text="We Chat" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:background="@color/colorGrayTrans" />
+
+</LinearLayout>
