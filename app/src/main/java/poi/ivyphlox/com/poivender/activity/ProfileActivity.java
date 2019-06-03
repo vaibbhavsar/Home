@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import poi.ivyphlox.com.poivender.R;
+import poi.ivyphlox.com.poivender.fragments.EditProfileFragment;
 import poi.ivyphlox.com.poivender.fragments.ProfileFragment;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.toolbar_center);
         ((TextView)getSupportActionBar().getCustomView().findViewById(R.id.tvTitle)).setText("Edit Profile");
-        pushFragment(ProfileFragment.newInstance("profile",""),false);
+        pushFragment(EditProfileFragment.newInstance("profile",""),false);
     }
 
     private void pushFragment(Fragment fragment, boolean addToBackStack) {

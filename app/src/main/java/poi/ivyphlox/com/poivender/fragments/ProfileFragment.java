@@ -180,7 +180,6 @@ public class ProfileFragment extends Fragment implements OnMapReadyCallback,
 
     private TextView tvAddPhoto;
 
-
     private Button btnAdd;
     private ImageView ivSave;
     private int addsocial = 0;
@@ -1224,6 +1223,19 @@ public class ProfileFragment extends Fragment implements OnMapReadyCallback,
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+        mapView1.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+        mapView1.onLowMemory();
+    }
 
     @Override
     public void onResume() {
@@ -1254,19 +1266,6 @@ public class ProfileFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-        mapView1.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-        mapView1.onLowMemory();
-    }
 
     String imageviewtoString(ImageView imageView) {
         try {

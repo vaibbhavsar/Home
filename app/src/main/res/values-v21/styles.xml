@@ -5,4 +5,13 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="edittextCustom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:backgroundTint">@color/colorTextDisable</item>
+        <item name="android:textSize">14dp</item>
+    </style>
 </resources>
