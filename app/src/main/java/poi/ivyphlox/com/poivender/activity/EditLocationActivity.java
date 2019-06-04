@@ -47,8 +47,12 @@ import poi.ivyphlox.com.poivender.network.WLAPIcalls;
 import poi.ivyphlox.com.poivender.utils.AppCommonMethods;
 import poi.ivyphlox.com.poivender.utils.AppConstants;
 import poi.ivyphlox.com.poivender.utils.AppPrefs;
+import poi.ivyphlox.com.poivender.utils.GPSGetLocation;
+import poi.ivyphlox.com.poivender.utils.GPSTracker;
 
-public class EditLocationActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, GoogleMap.OnMapClickListener, View.OnClickListener, WLAPIcalls.OnAPICallCompleteListener {
+public class EditLocationActivity extends AppCompatActivity implements OnMapReadyCallback,
+        LocationListener, GoogleMap.OnMapClickListener,
+        View.OnClickListener, WLAPIcalls.OnAPICallCompleteListener {
 
     private static final int REQUEST_CHECK_SETTINGS = 100;
     protected LocationManager locationManager;
@@ -67,7 +71,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
     private EditText edtAddressTitle;
     private EditText edtAddressDetails;
     private Context mContext = EditLocationActivity.this;
-    private String TAG="EditLocationActivity";
+    private String TAG = "EditLocationActivity";
 
 
     @Override
@@ -103,8 +107,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
         displayLocationSettingsRequest(mContext);
     }
 
-    void setPlaces()
-    {
+    void setPlaces() {
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -115,10 +118,10 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
                 mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(place.getName().toString()));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 16.0f));
-                AppPrefs.putStringPref(AppConstants.PREFS_LATITUDE,place.getLatLng().latitude+"",mContext);
-                AppPrefs.putStringPref(AppConstants.PREFS_LONGITUDE,place.getLatLng().longitude+"",mContext);
-                latitude=place.getLatLng().latitude+"";
-                longitude=place.getLatLng().longitude+"";
+                AppPrefs.putStringPref(AppConstants.PREFS_LATITUDE, place.getLatLng().latitude + "", mContext);
+                AppPrefs.putStringPref(AppConstants.PREFS_LONGITUDE, place.getLatLng().longitude + "", mContext);
+                latitude = place.getLatLng().latitude + "";
+                longitude = place.getLatLng().longitude + "";
 
             }
 
@@ -183,73 +186,81 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnMapClickListener(this);
-        LatLng latLng=mMap.getCameraPosition().target;
+        LatLng latLng = mMap.getCameraPosition().target;
         if (logInResponce != null && logInResponce.getLongitude() != null) {
 
-            mMap.getUiSettings().setMapToolbarEnabled(true);
-//            mMap.getUiSettings().setAllGesturesEnabled(true);
-
-            // for Zoom Button Enable on Google Map
-            mMap.getUiSettings().setZoomControlsEnabled(false);
-
-            //for Location  Button enable on Google Map
+            GPSTracker gpsTracker = new GPSTracker(mContext);
+            gpsTracker = new GPSGetLocation(mContext).getCurrentLatLongs();
+            LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+//
+            //add lat long object to add marker
+            // mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15.5f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16.0f));
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            if (logInResponce.getLatitude().isEmpty()) {
-                // mMap.getUiSettings().setMyLocationButtonEnabled(true);
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                mMap.setMyLocationEnabled(true);
-                  mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+
+        } else {
 
 //        // Add a marker in Sydney and move the camera
 //        //latlong object
 
-                LatLng sydney = new LatLng(Double.parseDouble(logInResponce.getLatitude()), Double.parseDouble(logInResponce.getLongitude()));
+            LatLng sydney = new LatLng(
+                    Double.parseDouble(logInResponce.getLatitude()),
+                    Double.parseDouble(logInResponce.getLongitude()));
 //
-                //add lat long object to add marker
-               // mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15.5f));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16.0f));
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
+            //add lat long object to add marker
+            // mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15.5f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16.0f));
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            }
-            googleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-                @Override
-                public void onCameraChange(CameraPosition cameraPosition) {
-
-                    Log.i("centerLat", String.valueOf(cameraPosition.target.latitude));
-
-                    Log.i("centerLong", String.valueOf(cameraPosition.target.longitude));
-                    latitude=String.valueOf(cameraPosition.target.latitude);
-                    longitude=String.valueOf(cameraPosition.target.longitude);
-
-                }
-            });
-
         }
+        googleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+
+                Log.i("centerLat", String.valueOf(cameraPosition.target.latitude));
+
+                Log.i("centerLong", String.valueOf(cameraPosition.target.longitude));
+                latitude = String.valueOf(cameraPosition.target.latitude);
+                longitude = String.valueOf(cameraPosition.target.longitude);
+
+            }
+        });
+
     }
+
+
 
     @Override
     public void onLocationChanged(Location location) {

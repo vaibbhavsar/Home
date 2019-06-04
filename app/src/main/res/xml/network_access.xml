@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
 <domain-config cleartextTrafficPermitted="true">
-    <domain includeSubdomains="true">103.255.216.5</domain>
+    <domain includeSubdomains="true">https://j7jjqlqd6l.execute-api.ap-south-1.amazonaws.com</domain>
 </domain-config>
 </network-security-config>

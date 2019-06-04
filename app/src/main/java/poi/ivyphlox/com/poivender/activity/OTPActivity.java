@@ -75,7 +75,11 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
                         intent.putExtra(MOBILE_NO,mobileStr);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        finish();                    }
+                        finish();
+
+                        Toast.makeText(mContext,"Coming Soon",Toast.LENGTH_SHORT);
+
+                    }
                 }
                 else {
                     Toast.makeText(mContext,"Please Enter Correct OTP",Toast.LENGTH_SHORT);
