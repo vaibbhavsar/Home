@@ -37,7 +37,6 @@ public class LoginActivity extends RuntimePermissionActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         if(AppPrefs.getBooleanPref(AppConstants.KEY_USER_IS_LOGEDIN,mContext))
         {
             startActivity(new Intent(mContext,NavigationActivity.class));

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +22,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +59,8 @@ import java.util.List;
 import poi.ivyphlox.com.poivender.R;
 import poi.ivyphlox.com.poivender.activity.EditLocationActivity;
 import poi.ivyphlox.com.poivender.adapter.ImageListAdapter;
+import poi.ivyphlox.com.poivender.model.BussinessProfileModel;
+import poi.ivyphlox.com.poivender.model.ImageModelBussiness;
 import poi.ivyphlox.com.poivender.model.LogInResponce;
 import poi.ivyphlox.com.poivender.model.ProfileMainProject;
 import poi.ivyphlox.com.poivender.network.WLAPIcalls;
@@ -325,6 +329,9 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
         mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location"));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.5f));
+
+        latitude=gpsTracker.getLatitude()+"";
+        longitude=gpsTracker.getLongitude()+"";
 //        // Add a marker in Sydney and move the camera
         //latlong object
 
@@ -335,6 +342,9 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         switch (view.getId()) {
             case R.id.btnSave:
 //                showCameraDialog();
+
+                onSave();
+
                 break;
             case R.id.ivProfile:
                 showCameraDialog();
@@ -356,10 +366,50 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
                 intent1.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent1.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent1,"Select Picture"), PICK_IMAGE_MULTIPLE);
+
+//                Intent intent = new Intent();
+//                intent.setAction(android.content.Intent.ACTION_VIEW);
+//                intent.setType("image/*");
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
             break;
 
 
         }
+    }
+
+
+    String imageviewtoString(ImageView imageView) {
+        try {
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+            byte[] imageInByte = baos.toByteArray();
+            return Base64.encodeToString(imageInByte, Base64.DEFAULT);
+        } catch (Exception e) {
+            return "";
+        }
+
+    }
+
+    private void onSave() {
+
+        BussinessProfileModel bussinessProfileModel=new BussinessProfileModel();
+
+        bussinessProfileModel.setProfileImage(imageviewtoString(ivProfile));
+        bussinessProfileModel.setBussinessName(edtBusinesName.getText().toString());
+        bussinessProfileModel.setArea((String)spnrArea.getSelectedItem());
+        bussinessProfileModel.setBussinessCat((String)spnrCatBusiness.getSelectedItem());
+        bussinessProfileModel.setCity((String)spnrCity.getSelectedItem());
+        bussinessProfileModel.setBussinessMobile(edtMobile.getText().toString());
+        bussinessProfileModel.setClosedTime(edtCloseTime.getText().toString());
+        bussinessProfileModel.setOpenTime(edtOpenTIme.getText().toString());
+        bussinessProfileModel.setDetailsAddress(edtDetailAddress.getText().toString());
+        bussinessProfileModel.setLat(latitude);
+        bussinessProfileModel.setLon(longitude);
+        bussinessProfileModel.setWebsite(edtWebsiteLIsnk.getText().toString());
+
+        updateBussinessProfile(bussinessProfileModel);
     }
 
     /**
@@ -435,15 +485,16 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
     private RecyclerView recyclerView;
     private ImageListAdapter madapter;
 
-    void setRecyclerView(final View view, List<String> accountMainPOJOS) {
+    void setRecyclerView(final View view, List<ImageModelBussiness> accountMainPOJOS) {
         if (accountMainPOJOS.size() == 0) {
             recyclerView.setVisibility(View.GONE);
             return;
         }
         recyclerView = view.findViewById(R.id.rvPhotos);
-        madapter = new ImageListAdapter(accountMainPOJOS, recyclerView);
+        madapter = new ImageListAdapter(accountMainPOJOS, recyclerView,
+                mContext);
         RecyclerView.LayoutManager mLayoutManager
-                = new LinearLayoutManager(getActivity());
+                = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(madapter);
@@ -498,14 +549,15 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
-                        ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                        List<Uri> mArrayUri = new ArrayList<Uri>();
                         for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                             ClipData.Item item = mClipData.getItemAt(i);
                             Uri uri = item.getUri();
                             mArrayUri.add(uri);
                             // Get the cursor
-                            Cursor cursor = getActivity().getContentResolver().query(uri, filePathColumn, null, null, null);
+                            Cursor cursor = getActivity().getContentResolver().query(uri, filePathColumn,
+                                    null, null, null);
                             // Move to first row
                             cursor.moveToFirst();
 
@@ -515,7 +567,18 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
                             cursor.close();
 
                         }
+                        List<ImageModelBussiness> mArrayUriString = new ArrayList<ImageModelBussiness>();
+
+                        for(Uri uri: mArrayUri)
+                        {
+                            ImageModelBussiness imageModelBussiness=new ImageModelBussiness();
+                            Log.e("LOG_TAG", "Selected Images " +uri.toString());
+                            imageModelBussiness.setUri(uri);
+                            mArrayUriString.add(imageModelBussiness);
+                        }
+
                         Log.e("LOG_TAG", "Selected Images1 " + mArrayUri.size());
+                        setRecyclerView(view,mArrayUriString);
                     }
                 }
             }
@@ -609,5 +672,19 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * This function is used to get recently viewed data from server
+     */
+    private void updateBussinessProfile(BussinessProfileModel logInResponce) {
+        if (new AppCommonMethods(mContext).isNetworkAvailable()) {
+            WLAPIcalls mAPIcall = new WLAPIcalls(mContext, getString(R.string.loginDate), this);
+            mAPIcall.updateBussinessProfile(logInResponce);
+        } else {
+            Toast.makeText(mContext, R.string.no_internet, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

@@ -260,8 +260,6 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-
-
     @Override
     public void onLocationChanged(Location location) {
         Log.e("Location", "Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
@@ -314,26 +312,6 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void save() {
-//        if (latitude == null) {
-//            Toast.makeText(mContext, "Please Click on Map to select Location", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//        if (latitude.length() == 0) {
-//            Toast.makeText(mContext, "Please Click on Map to select Location", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-
-//        if (edtAddressTitle.getText().toString().length() == 0) {
-//            edtAddressTitle.setError("Please Enter Address Title");
-//            return;
-//        }
-
-//        if (edtAddressDetails.getText().toString().length() == 0) {
-//            edtAddressDetails.setError("Please Enter Address Detail");
-//            return;
-//        }
-
-
         if (logInResponce != null) {
             logInResponce.setMobile_number(this.logInResponce.getMobile_number());
             logInResponce.set_id(null);
@@ -345,7 +323,6 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
             logInResponce.setName(this.logInResponce.getName());
             logInResponce.setAddressTitle(edtAddressTitle.getText().toString());
             logInResponce.setAddressDetails(edtAddressDetails.getText().toString());
-
             saveLogin(logInResponce);
         }
     }

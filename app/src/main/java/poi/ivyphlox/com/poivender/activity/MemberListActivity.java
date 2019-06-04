@@ -55,10 +55,10 @@ public class MemberListActivity extends AppCompatActivity implements View.OnClic
         {
             shareNumber=getIntent().getStringExtra("mobile");
         }
-        //getContactList();
         logInResponce=new Gson().fromJson(AppPrefs.getStringPref(AppConstants.PREFS_USER,mContext),LogInResponce.class);
         dbcheck();
     }
+
     void dbcheck()
     {
         dbHelper=new DBHelper(mContext);
