@@ -1,6 +1,7 @@
 package poi.ivyphlox.com.poivender.utils;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,7 +17,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
-//import com.example.pigme13.activity.HomePageActivity;
 
 /**
  * Created by Morya on 3/28/2018.
@@ -187,8 +187,7 @@ public class GPSTracker extends Service implements LocationListener {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
-//                HomePageActivity loginActivity= (HomePageActivity)mContext;
-//                loginActivity.sendLocatyopnSetting();
+
             }
         });
 
