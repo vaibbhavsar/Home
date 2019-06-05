@@ -395,7 +395,6 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
     private void onSave() {
 
         BussinessProfileModel bussinessProfileModel=new BussinessProfileModel();
-
         bussinessProfileModel.setProfileImage(imageviewtoString(ivProfile));
         bussinessProfileModel.setBussinessName(edtBusinesName.getText().toString());
         bussinessProfileModel.setArea((String)spnrArea.getSelectedItem());
@@ -408,7 +407,14 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         bussinessProfileModel.setLat(latitude);
         bussinessProfileModel.setLon(longitude);
         bussinessProfileModel.setWebsite(edtWebsiteLIsnk.getText().toString());
+        List<String> imgList=new ArrayList<>();
+        imgList.add("base64");
+        imgList.add("base64");
+        imgList.add("base64");
+        bussinessProfileModel.setImageList(imgList);
 
+        Log.e("updateBussinessProfile",
+                new Gson().toJson(bussinessProfileModel));
         updateBussinessProfile(bussinessProfileModel);
     }
 

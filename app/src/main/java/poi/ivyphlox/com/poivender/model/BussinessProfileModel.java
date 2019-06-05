@@ -1,5 +1,7 @@
 package poi.ivyphlox.com.poivender.model;
 
+import java.util.List;
+
 public class BussinessProfileModel
 {
     private String website;
@@ -20,7 +22,7 @@ public class BussinessProfileModel
 
     private String closedTime;
 
-    private String[] ImageList;
+    private List<String> ImageList;
 
     private String Area;
 
@@ -118,12 +120,12 @@ public class BussinessProfileModel
         this.closedTime = closedTime;
     }
 
-    public String[] getImageList ()
+    public List<String> getImageList ()
     {
         return ImageList;
     }
 
-    public void setImageList (String[] ImageList)
+    public void setImageList (List<String> ImageList)
     {
         this.ImageList = ImageList;
     }
