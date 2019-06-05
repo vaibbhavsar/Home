@@ -24,9 +24,11 @@ public class GPSGetLocation {
     private int REQUEST_CHECK_SETTINGS=11;
 
 
-    public GPSGetLocation(Activity mContext)
+    public GPSGetLocation(Context mContext)
     {
-        this.mContext=mContext;
+        Activity activity = (Activity) mContext;
+
+        this.mContext=activity;
     }
     public GPSTracker getCurrentLatLongs() {
                 mGps = new GPSTracker(mContext);

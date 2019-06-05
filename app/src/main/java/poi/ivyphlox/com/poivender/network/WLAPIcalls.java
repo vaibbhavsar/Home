@@ -33,6 +33,7 @@ import java.util.Map;
 
 import poi.ivyphlox.com.poivender.R;
 import poi.ivyphlox.com.poivender.main.WLAppController;
+import poi.ivyphlox.com.poivender.model.BussinessProfileModel;
 import poi.ivyphlox.com.poivender.model.ContactResponce;
 import poi.ivyphlox.com.poivender.model.ProfileMainProject;
 import poi.ivyphlox.com.poivender.utils.AppCommonMethods;
@@ -341,6 +342,71 @@ public class WLAPIcalls implements AppConstants {
         WLAppController.getInstance().addToRequestQueue(getRequest);
     }
 
+    /**
+     * <b>Put Profile Update</b>
+     * <p></p>
+     */
+    public void updateBussinessProfile(BussinessProfileModel logInResponce) {
+        pDialog = new ProgressDialog(mContext);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        pDialog.setCancelable(false);
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(new Gson().toJson(logInResponce));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = UPDATE_PROFILE;
+        new AppCommonMethods(mContext).LOG(0, TAG, url);
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.PUT,
+                url, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(final JSONObject response) {
+                        if (!((Activity) mContext).isFinishing()) {
+                            pDialog.dismiss();
+                        }
+                        // response
+                        Log.d("Response", response.toString());
+
+
+                        try {
+                            mApiCallCompleteListener.onAPICallCompleteListner(true, mFlag, response.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (!((Activity) mContext).isFinishing()) {
+                            // gotoNoInternet();
+                            pDialog.dismiss();
+
+                        }
+                        Toast.makeText(mContext, "User Id or password incorrect", Toast.LENGTH_SHORT).show();
+
+                        WLAPIcalls.this.onErrorResponse(error);
+                    }
+                }
+        )
+        {
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return getNCLHeaders();
+            }
+        }
+                ;
+        WLAppController.getInstance().addToRequestQueue(getRequest);
+    }
+
     public void getProfile(String mobile) {
         pDialog = new ProgressDialog(mContext);
         pDialog.setMessage("Loading...");
@@ -396,6 +462,7 @@ public class WLAPIcalls implements AppConstants {
                 ;
         WLAppController.getInstance().addToRequestQueue(getRequest);
     }
+
 
     public void getMembers(List<ContactResponce> contactModelList) {
         pDialog = new ProgressDialog(mContext);
