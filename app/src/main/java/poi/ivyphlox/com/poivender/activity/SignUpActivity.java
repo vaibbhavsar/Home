@@ -129,6 +129,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 LogInResponce logInResponce=new LogInResponce();
                 logInResponce.setMobile_number(edtMobCode.getText().toString()+edtMobile.getText().toString());
                 AppPrefs.putStringPref(AppConstants.PREFS_USER,new Gson().toJson(logInResponce),mContext);
+                AppPrefs.putStringPref(AppConstants.PREFS_MOBILE,edtMobCode.getText().toString()
+                        +edtMobile.getText().toString(),mContext);
 
                 Toast.makeText(mContext,jsonObject.getString("messsage"),Toast.LENGTH_SHORT).show();
 

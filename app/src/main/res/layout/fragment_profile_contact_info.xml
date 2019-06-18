@@ -1,0 +1,165 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="poi.ivyphlox.com.poivender.fragments.ProfileContactInfoFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/V10dip">
+
+            <ImageView
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="@dimen/V40dip"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/V10dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"/>
+                <TextView
+                    android:id="@+id/tvPhone"
+                   style="@style/textViewBlack"
+                    android:text="+91 987643212"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/V10dip">
+
+            <ImageView
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="@dimen/V40dip"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/V10dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"/>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/textViewBlack"
+                    android:text="abc@gmail.com"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/V10dip">
+
+            <ImageView
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="@dimen/V40dip"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/V10dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WEBSITE"/>
+                <TextView
+                    android:id="@+id/tvWebsite"
+                    android:layout_width="match_parent"
+                    style="@style/textViewBlack"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.flipkart.com/"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/V10dip">
+
+            <ImageView
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="@dimen/V40dip"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/V10dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OPENING TIME"/>
+                <TextView
+                    android:id="@+id/tvOpeningTime"
+                    android:layout_width="match_parent"
+                    style="@style/textViewBlack"
+                    android:layout_height="wrap_content"
+                    android:text="10:00 AM - 11:00 PM"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/V10dip">
+
+            <ImageView
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="@dimen/V40dip"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/V10dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ADDRESS"/>
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    style="@style/textViewBlack"
+                    android:layout_height="wrap_content"
+                    android:text="Abc Square, G M Road, Xyz-43234"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/V5dip"
+            android:clickable="false"
+            app:uiRotateGestures="false"
+            app:uiScrollGestures="false"
+            app:uiTiltGestures="false"
+            app:uiZoomGestures="false">
+
+        </com.google.android.gms.maps.MapView>
+
+    </LinearLayout>
+
+</FrameLayout>

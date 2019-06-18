@@ -41,9 +41,12 @@ import java.util.List;
 import poi.ivyphlox.com.poivender.DBHelper;
 import poi.ivyphlox.com.poivender.LoadContactsActivity;
 import poi.ivyphlox.com.poivender.R;
+import poi.ivyphlox.com.poivender.fragments.DashboardFragment;
 import poi.ivyphlox.com.poivender.fragments.HomeFragment;
 import poi.ivyphlox.com.poivender.fragments.NotificationFragment;
 import poi.ivyphlox.com.poivender.fragments.ProfileFragment;
+import poi.ivyphlox.com.poivender.fragments.ViewProfileFragment;
+import poi.ivyphlox.com.poivender.model.BussinessProfileModel;
 import poi.ivyphlox.com.poivender.model.Contact;
 import poi.ivyphlox.com.poivender.model.ContactResponce;
 import poi.ivyphlox.com.poivender.model.LogInResponce;
@@ -73,7 +76,7 @@ public class NavigationActivity extends RuntimePermissionActivity
             switch (item.getItemId()) {
                 case R.id.navigation_btm_home:
                     if (isPermission) {
-                        pushFragment(HomeFragment.newInstance("",""), false);
+                        pushFragment(DashboardFragment.newInstance("",""), false);
                     } else {
                         permission();
                     }
@@ -81,11 +84,11 @@ public class NavigationActivity extends RuntimePermissionActivity
                 case R.id.navigation_btm_location:
                     comingSoon();
                     return true;
-                case R.id.navigation_notifications:
-                    pushFragment(NotificationFragment.newInstance("",""), false);
-                    return true;
+//                case R.id.navigation_notifications:
+//                    pushFragment(NotificationFragment.newInstance("",""), false);
+//                    return true;
                 case R.id.navigation_btm_profile:
-                    pushFragment( ProfileFragment.newInstance("",""), false);
+                    pushFragment( ViewProfileFragment.newInstance("",""), false);
                     return true;
             }
             return false;
@@ -96,8 +99,6 @@ public class NavigationActivity extends RuntimePermissionActivity
     {
         Toast.makeText(mContext,"Coming Soon",Toast.LENGTH_SHORT).show();
     }
-
-
 
     private DBHelper dbHelper;
     @Override
@@ -112,33 +113,24 @@ public class NavigationActivity extends RuntimePermissionActivity
         ((TextView)getSupportActionBar().getCustomView().findViewById(R.id.tvTitle)).setText(R.string.app_name);
         mTextMessage = findViewById(R.id.tvName);
 
-        dbHelper=new DBHelper(mContext);
-        if(dbHelper.getAllContacts().size()==0){
-            Intent intent=new Intent(mContext, LoadContactsActivity.class);
-            startActivity(intent);
-        }
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+//        dbHelper=new DBHelper(mContext);
+//        if(dbHelper.getAllContacts().size()==0){
+//            Intent intent=new Intent(mContext, LoadContactsActivity.class);
+//            startActivity(intent);
+//        }
 
-         navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationViewHelper.removeShiftMode(navigation);
         permission();
 
 //        if(isPermission) {
-            pushFragment(new HomeFragment(), true);
+        pushFragment(DashboardFragment.newInstance("",""), false);
 //        }
         //getContactList();
         LogInResponce logInResponce=new LogInResponce();
         logInResponce=new Gson().fromJson(AppPrefs.getStringPref(AppConstants.PREFS_USER,mContext),LogInResponce.class);
         //loadRecent(logInResponce.getMobile_number());
-        loadDbGetMember();
 
         /**call for turn on location
          *
@@ -146,27 +138,7 @@ public class NavigationActivity extends RuntimePermissionActivity
         displayLocationSettingsRequest(mContext);
     }
 
-    void loadDbGetMember()
-    {
-        List<Contact> contacts=dbHelper.getAllContacts();
-        List<ContactResponce> tempContact = new ArrayList<>();
 
-        for (int i = 0; i < contacts.size(); i++) {
-            Contact contact = contacts.get(i);
-            if (tempContact.size() < 100) {
-                ContactResponce contactResponce=new ContactResponce();
-                contactResponce.setIs_POI("false");
-                contactResponce.setMobile_number(contact.getPhoneNumber());
-                contactResponce.setName(contact.getName());
-                tempContact.add(contactResponce);
-            } else {
-
-                loadMembers(tempContact);
-                tempContact = new ArrayList<>();
-            }
-        }
-        loadMembers(tempContact);
-    }
 
     /**
      * This function is used to get recently viewed data from server
@@ -184,8 +156,8 @@ public class NavigationActivity extends RuntimePermissionActivity
     protected void onResume() {
         super.onResume();
         //getContactList();
-        LogInResponce logInResponce=new LogInResponce();
-        logInResponce=new Gson().fromJson(AppPrefs.getStringPref(AppConstants.PREFS_USER,mContext),LogInResponce.class);
+        BussinessProfileModel logInResponce=new BussinessProfileModel();
+        logInResponce=new Gson().fromJson(AppPrefs.getStringPref(AppConstants.PREFS_USER,mContext),BussinessProfileModel.class);
         loadRecent(logInResponce.getMobile_number());
     }
 
@@ -327,7 +299,6 @@ public class NavigationActivity extends RuntimePermissionActivity
 
     void logout()
     {
-        dbHelper.deleteDB();
         AppPrefs.putBooleanPref(AppConstants.KEY_USER_IS_LOGEDIN,false,mContext);
         startActivity(new Intent(mContext,LoginActivity.class));
         finish();
@@ -338,14 +309,16 @@ public class NavigationActivity extends RuntimePermissionActivity
         try {
             if(flag.equalsIgnoreCase(mContext.getString(R.string.loginDate))){
 
+                Log.e("ProfileResponce",result);
+
                 JSONObject jsonObject =new JSONObject(result);
 
-                LogInResponce logInResponce=new LogInResponce();
-                logInResponce=new Gson().fromJson(result,LogInResponce.class);
+                BussinessProfileModel logInResponce=new BussinessProfileModel();
+                logInResponce=new Gson().fromJson(result,BussinessProfileModel.class);
                 AppPrefs.putStringPref(AppConstants.PREFS_USER,result,mContext);
                 AppPrefs.putBooleanPref(AppConstants.KEY_USER_IS_LOGEDIN,true,mContext);
 
-                if(logInResponce.getName().equals(""))
+                if(logInResponce.getBussinessName().equals(""))
                 {
                      startActivity(new Intent(mContext,ProfileActivity.class));
                 }

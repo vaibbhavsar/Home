@@ -65,8 +65,7 @@ public class LoginActivity extends RuntimePermissionActivity implements View.OnC
                         Manifest.permission.WRITE_CONTACTS,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.SEND_SMS},
+                        Manifest.permission.ACCESS_FINE_LOCATION},
                 R.string.runtime_permissions_txt
                 , REQUEST_PERMISSIONS);
     }

@@ -1,9 +1,54 @@
 package poi.ivyphlox.com.poivender.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class BussinessProfileModel
+public class BussinessProfileModel implements Parcelable
 {
+    protected BussinessProfileModel(Parcel in) {
+        mobile_number = in.readString();
+        website = in.readString();
+        detailsAddress = in.readString();
+        bussinessCat = in.readString();
+        bussinessName = in.readString();
+        lon = in.readString();
+        bussinessMobile = in.readString();
+        City = in.readString();
+        profileImage = in.readString();
+        closedTime = in.readString();
+        ImageList = in.createStringArrayList();
+        Area = in.readString();
+        openTime = in.readString();
+        lat = in.readString();
+    }
+
+    public BussinessProfileModel(){
+
+    }
+
+    public static final Creator<BussinessProfileModel> CREATOR = new Creator<BussinessProfileModel>() {
+        @Override
+        public BussinessProfileModel createFromParcel(Parcel in) {
+            return new BussinessProfileModel(in);
+        }
+
+        @Override
+        public BussinessProfileModel[] newArray(int size) {
+            return new BussinessProfileModel[size];
+        }
+    };
+
+    public String getMobile_number() {
+        return mobile_number;
+    }
+
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
+    }
+
+    private String mobile_number;
     private String website;
 
     private String detailsAddress;
@@ -176,5 +221,28 @@ public class BussinessProfileModel
                 " Area = "+Area+"," +
                 " openTime = "+openTime+"," +
                 " lat = "+lat+"]";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mobile_number);
+        parcel.writeString(website);
+        parcel.writeString(detailsAddress);
+        parcel.writeString(bussinessCat);
+        parcel.writeString(bussinessName);
+        parcel.writeString(lon);
+        parcel.writeString(bussinessMobile);
+        parcel.writeString(City);
+        parcel.writeString(profileImage);
+        parcel.writeString(closedTime);
+        parcel.writeStringList(ImageList);
+        parcel.writeString(Area);
+        parcel.writeString(openTime);
+        parcel.writeString(lat);
     }
 }

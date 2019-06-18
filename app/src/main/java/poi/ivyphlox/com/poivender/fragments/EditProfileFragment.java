@@ -40,13 +40,13 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,10 +58,11 @@ import java.util.List;
 
 import poi.ivyphlox.com.poivender.R;
 import poi.ivyphlox.com.poivender.activity.EditLocationActivity;
+import poi.ivyphlox.com.poivender.activity.NavigationActivity;
+import poi.ivyphlox.com.poivender.activity.ViewProfileActivity;
 import poi.ivyphlox.com.poivender.adapter.ImageListAdapter;
 import poi.ivyphlox.com.poivender.model.BussinessProfileModel;
 import poi.ivyphlox.com.poivender.model.ImageModelBussiness;
-import poi.ivyphlox.com.poivender.model.LogInResponce;
 import poi.ivyphlox.com.poivender.model.ProfileMainProject;
 import poi.ivyphlox.com.poivender.network.WLAPIcalls;
 import poi.ivyphlox.com.poivender.service.ClickListener;
@@ -113,7 +114,8 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
     private Bundle savedInstanceState;
     private GoogleMap mMap;
     public int REQ_CHANGE_LOC = 10;
-
+    private MapView mapView;
+    private String strMobile;
 
     private List<String> stringPhotos;
 
@@ -156,7 +158,12 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         mContext = getActivity();
         ivProfile = view.findViewById(R.id.ivProfile);
         this.savedInstanceState = savedInstanceState;
+        strMobile=AppPrefs.getStringPref(AppConstants.PREFS_MOBILE,mContext);
+
+
         initController();
+        edtMobile.setText(strMobile);
+
         return view;
     }
 
@@ -188,7 +195,6 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         initMap();
     }
 
-    private MapView mapView;
 
     void initMap() {
 
@@ -304,7 +310,15 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
 
     @Override
     public void onAPICallCompleteListner(Object item, String flag, String result) throws JSONException {
-        if (flag.equals(mContext.getString(R.string.loginDateImage))) {
+        if (flag.equals(mContext.getString(R.string.loginDate))) {
+
+            JSONObject jsonObject=new JSONObject(result);
+            Log.e("ProfileEdit",result);
+//            if(jsonObject.getString("message").equalsIgnoreCase("Profile Updated Successfully"))
+//            {
+                startActivity(new Intent(mContext, NavigationActivity.class));
+                getActivity().finish();
+//            }
 
         }
     }
@@ -332,8 +346,6 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
 
         latitude=gpsTracker.getLatitude()+"";
         longitude=gpsTracker.getLongitude()+"";
-//        // Add a marker in Sydney and move the camera
-        //latlong object
 
     }
 
@@ -406,6 +418,7 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         bussinessProfileModel.setDetailsAddress(edtDetailAddress.getText().toString());
         bussinessProfileModel.setLat(latitude);
         bussinessProfileModel.setLon(longitude);
+        bussinessProfileModel.setMobile_number(strMobile);
         bussinessProfileModel.setWebsite(edtWebsiteLIsnk.getText().toString());
         List<String> imgList=new ArrayList<>();
         imgList.add("base64");
@@ -416,6 +429,9 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
         Log.e("updateBussinessProfile",
                 new Gson().toJson(bussinessProfileModel));
         updateBussinessProfile(bussinessProfileModel);
+
+
+      //  startActivity(new Intent(mContext, ViewProfileActivity.class));
     }
 
     /**
@@ -685,7 +701,7 @@ public class EditProfileFragment extends Fragment implements WLAPIcalls.OnAPICal
      */
     private void updateBussinessProfile(BussinessProfileModel logInResponce) {
         if (new AppCommonMethods(mContext).isNetworkAvailable()) {
-            WLAPIcalls mAPIcall = new WLAPIcalls(mContext, getString(R.string.loginDate), this);
+            WLAPIcalls mAPIcall = new WLAPIcalls(mContext, mContext.getString(R.string.loginDate), this);
             mAPIcall.updateBussinessProfile(logInResponce);
         } else {
             Toast.makeText(mContext, R.string.no_internet, Toast.LENGTH_SHORT).show();

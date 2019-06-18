@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="poi.ivyphlox.com.poivender.fragments.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ivVendor"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/avatar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/V10dip"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/whiteTextLarge"
+                android:text="Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                style="@style/whiteTextSmall"
+                android:text="Name"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="@dimen/V40dip"
+                android:layout_height="0.5sp"
+                android:layout_marginTop="@dimen/V10dip"
+                android:background="@color/colorGray"/>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:weightSum="2"
+             android:layout_marginTop="@dimen/V10dip"
+             android:orientation="horizontal">
+             <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="0dp"
+                 android:layout_weight="1"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:id="@+id/tvNoOfViews"
+                     style="@style/whiteTextLarge"
+                     android:text="Name"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     />
+                 <TextView
+                     android:layout_width="match_parent"
+                     style="@style/whiteTextSmall"
+                     android:text="No. Of Views"
+                     android:layout_height="wrap_content" />
+
+             </LinearLayout>
+             <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="0dp"
+                 android:layout_weight="1"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:id="@+id/tvNoSaveContact"
+                     style="@style/whiteTextLarge"
+                     android:text="Name"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     />
+                 <TextView
+                     android:layout_width="match_parent"
+                     style="@style/whiteTextSmall"
+                     android:text="No. Of Views"
+                     android:layout_height="wrap_content" />
+
+             </LinearLayout>
+         </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_all_member"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package poi.poi.ivyphlox.com.poivendervender.activity;
+package poi.ivyphlox.com.poivender.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,9 +26,9 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 case R.id.navigation_btm_location:
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
+//                case R.id.navigation_notifications:
+//                    mTextMessage.setText(R.string.title_notifications);
+//                    return true;
                 case R.id.navigation_btm_profile:
                     mTextMessage.setText(R.string.title_notifications);
                     return true;

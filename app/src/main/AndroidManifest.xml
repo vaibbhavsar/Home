@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <uses-feature
         android:name="android.hardware.camera.any"
@@ -24,11 +23,11 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
 
     <application
-        android:networkSecurityConfig="@xml/network_access"
         android:name=".main.WLAppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_access"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -108,7 +107,8 @@
         <activity android:name=".activity.ContactDetailsActivity" />
         <activity android:name=".activity.MemberListActivity" />
         <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.InviteActivity"></activity>
+        <activity android:name=".activity.InviteActivity" />
+        <activity android:name=".activity.ViewProfileActivity"></activity>
     </application>
 
 </manifest>

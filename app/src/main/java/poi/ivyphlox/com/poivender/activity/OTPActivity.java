@@ -65,7 +65,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
                 if(isValid()) {
                     if (isREgiter) {
                         AppPrefs.putBooleanPref(AppConstants.KEY_USER_IS_LOGEDIN,true,mContext);
-                        Intent intent=new Intent(OTPActivity.this, NavigationActivity.class);
+                        Intent intent=new Intent(OTPActivity.this, ProfileActivity.class);
                         intent.putExtra(MOBILE_NO,mobileStr);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

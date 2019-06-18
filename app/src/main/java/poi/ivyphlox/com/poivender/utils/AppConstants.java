@@ -8,7 +8,7 @@ public interface AppConstants {
 
     String PIPE_VALUES_SEPERATOR = "\\|";
     String DOT_VALUES_SEPERATOR = "\\.";
-    String APP_CLIENT_TYPE = "Member";
+    String APP_CLIENT_TYPE = "Vendor";
     String APP_NAME = "WineList";
     String APP_CLIENT_TYPE_KEY = "usertype";
     String APP_AUTHORIZATION="Authorization";
@@ -207,5 +207,6 @@ public interface AppConstants {
 
     String OTP_LENGTH="OTP_LENGTH";
     String USER_TYPE_CMS="?objectType=object_type.User";
+    String PREFS_MOBILE = "pref_mobile";
 //    "resourceId": 1,            "objectType": "object_type.Liquor",            "objectCatType": "liquor_type.WN",            "cmsId": "1.jpg",            "brandName": "Errazuriz Max Reserva Chardonnay",            "manufacturerName": "Valle de Casablanca, Product of Chile",            "manufacturerCountry": "Chile",            "resourceCapacity": "750",            "resourceStrength": "40.00%",            "secondaryLegend": "",            "isDeleted": true
 }
